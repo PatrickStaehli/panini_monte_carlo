@@ -31,7 +31,7 @@ The Monte-Carlo simulation can be found in Panini_MonteCarlo.ipny. The simulatio
 	2.1) Generate a pack of five uniformly, randomly distributed stickers 
 	2.2) For each sticker in the pack, increase the entry with the sticker ID in the album array by one.
 
-This simulation is the run for 10000 times. 
+This simulation is the run for 2000 times. 
 
 ### Amount of packs to buy to fill the album
 ![No_of_Packs](img/no_swapping/no_of_packs.png)
@@ -55,13 +55,67 @@ fill the album. However, there is an equal probability that one has to buy more 
 
 If one does not swap any stickers, the median of the amount of duplicated stickers is 3987. 
 
-** In conclusion, it is a very expensive strategy to fill the album without swapping stickers**
+**In conclusion, it is a very expensive strategy to fill the album without swapping stickers**
 
 ## With swapping
 
+### Idealized swapping
+In a fist step, the situation of ideal swapping is analyzed with multiple collectors. The simulation set-up is as follows:
+
+The simulation contains of *n* time steps until the album of each collector is full
+At each step:
+- Each collector with an uncompleted album buys one sticker pack and adds the stickers to his album
+- Each collector swaps his duplicates with each other collector. This happens in random order to not favor one collector. Collectors with a full sticker book still participate the swapping process.
+
+#### Amount of packs to buy to fill the album
+![No_of_Packs](img/swapping/no_of_packs_swapping.png)
+
+Obviously, on average, you need to buy less sticker packs if you are able to swap the stickers with others. Anyhow, there are sill some outliers that needed to buy more than 1000 packs of stickers, even en the case of 19 collectors.
+The reason for this is that collectors that complete their album stop buying stickers and stop swapping because they have no need for new stickers. In the case where most of the collectors are lucky and finish their books very early, the ones that have not finished the books yet have
+then access to only a limited set of stickers that they can swap.
+
+This behavior, however, is not really realistic. Collectors with a completed book might have a large amount of duplicates. Instead of throwing them away, they will either sell them or give them away. This behavior is considered in the next section.
+
+**Five collectors**
+|Probability | 10% | 20% | 30% | 40% | 50% | 
+| --- | --- | --- | --- | --- | --- |
+|# Packs to buy | < 326 | < 346 | < 363 | < 383 | < 440 |
+|  | < 604 | < 511 | < 460 | > 430 |  |
+
+**Ten collectors**
+|Probability | 10% | 20% | 30% | 40% | 50% | 
+| --- | --- | --- | --- | --- | --- |
+|# Packs to buy | < 251 | < 266 | < 277 | < 290 | < 305 |
+|  | < 457 | < 387 | < 346 | > 322 |  |
+
+#### Amount of duplicates when completing the album
+
+![No_of_Duplicates](img/swapping/no_of_duplicates_swapping.png)
+
+**Five collectors**
+|Probability | 10% | 20% | 30% | 40% | 50% | 
+| --- | --- | --- | --- | --- | --- |
+|# of duplicates | < 952 | < 1052 | < 1137 | < 1237 | < 1337 |
+| | < 2342 | < 1877 | < 1622 | > 1473 |  |
+
+**Ten collectors**
+|Probability | 10% | 20% | 30% | 40% | 50% | 
+| --- | --- | --- | --- | --- | --- |
+|# of duplicates | < 577 | < 652 | < 707 | < 772 | < 847 |
+| | < 1607 | < 1257 | < 1052 | > 932 |  |
+
+
+**In conclusion, finding a lot of other collectors that are willing to swap stickers helps to reduce the amount of stickers that have to be bought to complete the album.**
+**However, even for 10 collectors, the median number of duplicated stickers when completing the album is 847. If collectors give away or sell these stickers, this could reduce the amount of stickers to buy for other collectors.**
+
+
+### More realistic case
+
 [Todo]
-
-
+- Collectors that have completed their books give away the duplicated stickers. 
+- [Option] At each time step, there is an equal probability to buy 0-5 packs of stickers if the album is not yet complete.
+- [Option] At each time step, there is also some probability p to meet a friend and swap duplicated stickers.
+- [Option] There is a probability to leave this bubble and meet some other people to exchange stickers.
 
 ## References
 [1] https://www.unige.ch/math/folks/velenik/Vulg/Paninimania.pdf
