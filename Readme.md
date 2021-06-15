@@ -28,7 +28,9 @@ The Monte-Carlo simulation can be found in Panini_MonteCarlo.ipny. The simulatio
 
 1) Initialize the album as an array of zeros with the length = # of sticker in the album
 2) Repeat the following steps until the album array does not contain any zeros entries anymore
+	
 	2.1) Generate a pack of five uniformly, randomly distributed stickers 
+	
 	2.2) For each sticker in the pack, increase the entry with the sticker ID in the album array by one.
 
 This simulation is the run for 2000 times. 
@@ -71,10 +73,9 @@ At each step:
 ![No_of_Packs](img/swapping/no_of_packs_swapping.png)
 
 Obviously, on average, you need to buy less sticker packs if you are able to swap the stickers with others. Anyhow, there are sill some outliers that needed to buy more than 1000 packs of stickers, even en the case of 19 collectors.
-The reason for this is that collectors that complete their album stop buying stickers and stop swapping because they have no need for new stickers. In the case where most of the collectors are lucky and finish their books very early, the ones that have not finished the books yet have
+The reason for this is that collectors that complete their album stop buying stickers because they have no need for new stickers. In the case where most of the collectors are lucky and finish their books very early, the ones that have not finished the books yet have
 then access to only a limited set of stickers that they can swap.
 
-This behavior, however, is not really realistic. Collectors with a completed book might have a large amount of duplicates. Instead of throwing them away, they will either sell them or give them away. This behavior is considered in the next section.
 
 **Five collectors**
 |Probability | 10% | 20% | 30% | 40% | 50% | 
@@ -106,16 +107,63 @@ This behavior, however, is not really realistic. Collectors with a completed boo
 
 
 **In conclusion, finding a lot of other collectors that are willing to swap stickers helps to reduce the amount of stickers that have to be bought to complete the album.**
-**However, even for 10 collectors, the median number of duplicated stickers when completing the album is 847. If collectors give away or sell these stickers, this could reduce the amount of stickers to buy for other collectors.**
+**However, even for 10 collectors, the median number of duplicated stickers when completing the album is 847.**
 
 
-### More realistic case
+## Including the possibility to buy missing stickers
+Panini offers the possibility to buy up to 50 missing stickers directly over their website. To investigate the influence of this possibility, the simulations are again performed as above, but including:
+- Collectors that have equal or less than 50 missing stickers buy them directly and complete the album in this way.
 
-[Todo]
-- Collectors that have completed their books give away the duplicated stickers. 
-- [Option] At each time step, there is an equal probability to buy 0-5 packs of stickers if the album is not yet complete.
-- [Option] At each time step, there is also some probability p to meet a friend and swap duplicated stickers.
-- [Option] There is a probability to leave this bubble and meet some other people to exchange stickers.
+### Amount of packs to buy to fill the album
+![No_of_Stickers](img/swapping/no_of_packs_swapping_buy_last.png)
+
+**One collector**
+|Probability | 10% | 20% | 30% | 40% | 50% | 
+| --- | --- | --- | --- | --- | --- |
+|# Packs to buy | < 343 | < 350 | < 355 | < 359 | < 363 |
+| | < 385 | < 377 | < 372 | > 367 |  |
+
+**Five collectors**
+|Probability | 10% | 20% | 30% | 40% | 50% | 
+| --- | --- | --- | --- | --- | --- |
+|# Packs to buy | < 176 | < 179 | < 180 | < 182 | < 183 |
+| | < 193 | < 187 | < 187 | > 185 |  |
+
+**Ten collectors**
+|Probability | 10% | 20% | 30% | 40% | 50% | 
+| --- | --- | --- | --- | --- | --- |
+|# Packs to buy | < 159 | < 161 | < 162 | < 163 | < 164 |
+| | < 170 | < 168 | < 166 | > 165 |  |
+
+
+### Amount of duplicates when completing the album
+![No_of_Duplicates](img/swapping/no_of_duplicates_swapping_buy_last.png)
+
+**One collector**
+|Probability | 10% | 20% | 30% | 40% | 50% | 
+| --- | --- | --- | --- | --- | --- |
+|# of duplicates | < 1037 | < 1072 | < 1097 | < 1117 | < 1137 |
+| | < 1247 | < 1207 | < 1182 | > 1161 |  |
+
+**Five collectors**
+|Probability | 10% | 20% | 30% | 40% | 50% | 
+| --- | --- | --- | --- | --- | --- |
+|# of duplicates| < 237 | < 252 | < 262 | < 271 | < 279 |
+| | < 338 | < 313 | < 299 | > 189 |  |
+
+**Ten collectors**
+|Probability | 10% | 20% | 30% | 40% | 50% | 
+| --- | --- | --- | --- | --- | --- |
+|# of duplicates | < 124 | < 132 | < 140 | < 145 | < 151 |
+| | < 189  | < 175 | < 166 | > 158 |  |
+
+
+Using the possibility to buy missing stickers reduced the mean number of sticker packs to buy for a single collector from 933 to 363. In case of five collectors, the mean number of sticker packs reduces from 440 to 183. More importantly,
+the "unlucky" outliers that had to buy more than 1000 stickers, even in the case of many collectors, can be eliminated by buying missing stickers. 
+
+
+## Conclusion
+The best strategy to fill the album is to swap the stickers with as many other collectors as possible and directly buy the last 50 missing stickers over the panini website.
 
 ## References
 [1] https://www.unige.ch/math/folks/velenik/Vulg/Paninimania.pdf
