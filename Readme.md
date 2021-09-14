@@ -1,6 +1,6 @@
 # Monte-Carlo simulation to estimate the cost of a complete Panini sticker album
 
-You can read the story on ![medium](https://medium.com/@patrick.staehli_95233/a-gentle-introduction-to-monte-carlo-simulations-7cc298c9a265).
+You can read the story on [medium](https://medium.com/@patrick.staehli_95233/a-gentle-introduction-to-monte-carlo-simulations-7cc298c9a265).
 
 ## Background
 It is now almost a tradition that with each new football cup, a new collection of Panini stickers is available. The Panini sticker album of the UEFA Euro 2020
